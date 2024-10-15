@@ -1,13 +1,9 @@
-#+TITLE: README
+#+TITLE: yy-render --- simple DX12 based OBJ render
 #+DATE: [2024-10-15 22:07]
 
-* yy-render --- simple DX12 based OBJ render
-
 In 2024, I spent three months on it: July, Augest and September. It can render
-simple OBJ format 3D model.
-
-To give it a try, you need to install VS2022 on your PC, then compile and run
-it. I provide some models in the =models= folder.
+simple OBJ format 3D model.To give it a try, you need to install VS2022 on your
+PC, then compile and run it. I provide some models in the =models= folder.
 
 To get more information, please goto =doc= folder and check ORG or HTML documentation,
 I provide both English and Chinese versions.
