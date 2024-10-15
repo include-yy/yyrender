@@ -1,4 +1,4 @@
-#+TITLE: yy-render --- simple DX12 based OBJ render
+#+TITLE: yy-render --- a simple DX12 based OBJ render
 #+DATE: [2024-10-15 22:07]
 
 In 2024, I spent three months on it: July, Augest and September. It can render
