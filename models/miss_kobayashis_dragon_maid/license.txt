@@ -1,0 +1,11 @@
+Model Information:
+* title:	Miss Kobayashi's Dragon Maid
+* source:	https://sketchfab.com/3d-models/miss-kobayashis-dragon-maid-1fcb215f39c64a1e895dc6d08d81520c
+* author:	Dystopia (https://sketchfab.com/anhtle2010)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Miss Kobayashi's Dragon Maid" (https://sketchfab.com/3d-models/miss-kobayashis-dragon-maid-1fcb215f39c64a1e895dc6d08d81520c) by Dystopia (https://sketchfab.com/anhtle2010) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

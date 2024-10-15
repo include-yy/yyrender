@@ -1,0 +1,11 @@
+Model Information:
+* title:	Miku
+* source:	https://sketchfab.com/3d-models/miku-5aacd3a1abe74b55999e5df970c5315b
+* author:	Saionji (https://sketchfab.com/Saionji)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Miku" (https://sketchfab.com/3d-models/miku-5aacd3a1abe74b55999e5df970c5315b) by Saionji (https://sketchfab.com/Saionji) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

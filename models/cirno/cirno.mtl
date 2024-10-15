@@ -1,0 +1,102 @@
+# Blender 4.1.1 MTL File: 'None'
+# www.blender.org
+
+newmtl N00_000_00_Body_00_SKIN_(Instance).003
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd Image_7.png
+map_Ke Image_10.png
+map_d Image_7.png
+
+newmtl N00_000_00_EyeHighlight_00_EYE_(Instance).003
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd Image_0.png
+map_Ke Image_4.png
+map_d Image_0.png
+
+newmtl N00_000_00_EyeIris_00_EYE_(Instance).003
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd Image_0.png
+map_Ke Image_4.png
+map_d Image_0.png
+
+newmtl N00_000_00_FaceBrow_00_FACE_(Instance).003
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd Image_0.png
+map_Ke Image_4.png
+map_d Image_0.png
+
+newmtl N00_000_00_FaceMouth_00_FACE_(Instance).003
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd Image_0.png
+map_Ke Image_4.png
+map_d Image_0.png
+
+newmtl N00_000_00_Face_00_SKIN_(Instance).003
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd Image_0.png
+map_Ke Image_4.png
+map_d Image_0.png
+
+newmtl N00_000_00_HairBack_00_HAIR_(Instance).003
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd Image_7.png
+map_Ke Image_10.png
+map_d Image_7.png
+
+newmtl N00_000_Hair_00_HAIR_01_(Instance).003
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd Image_7.png
+map_Ke Image_10.png
+map_d Image_7.png
+
+newmtl N00_000_Hair_00_HAIR_02_(Instance).003
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd Image_7.png
+map_Ke Image_10.png
+map_d Image_7.png
+
+newmtl N00_001_01_Shoes_01_CLOTH_(Instance).003
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd Image_7.png
+map_Ke Image_10.png
+map_d Image_7.png

@@ -1,0 +1,8 @@
+[2024-80-08]
+- Add utf-8 manifest https://learn.microsoft.com/en-us/windows/apps/design/globalizing/use-utf8-code-page
+- Enable utf-8 https://learn.microsoft.com/en-us/cpp/build/reference/utf-8-set-source-and-executable-character-sets-to-utf-8?view=msvc-170
+[2024-08-06]
+- Add peg parser https://github.com/yhirose/cpp-peglib
+[2024-08-05]
+- Add DirectX-Headers https://github.com/microsoft/DirectX-Headers
+  - 9be295b3b81ce1d0ff2b44f18d0eb86ea54c5122

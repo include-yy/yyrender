@@ -1,0 +1,42 @@
+# Blender 4.1.1 MTL File: 'None'
+# www.blender.org
+
+newmtl SIM001_IKa_Musume
+Ns 1.788855
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd SIM001_IKa_Musume_baseColor.png
+
+newmtl SIM001_IKa_Musume_1
+Ns 1.788855
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd SIM001_IKa_Musume_baseColor.png
+
+newmtl SIM001_IKa_Musume_eye
+Ns 1.788855
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd SIM001_IKa_Musume_baseColor.png
+
+newmtl SIM001_IKa_Musume_face
+Ns 1.788855
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd SIM001_IKa_Musume_baseColor.png

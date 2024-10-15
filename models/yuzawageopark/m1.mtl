@@ -1,0 +1,178 @@
+# Blender 4.1.1 MTL File: 'None'
+# www.blender.org
+
+newmtl Accessory_GlassesHiFrame_01_MATCAP__Instance
+Ns 10.000005
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd Accessory_GlassesHiFrame_01_MATCAP__Instance_baseColor.jpeg
+map_Ke N00_000_00_FaceMouth_00_FACE__Instance_emissive.jpeg
+# map_Bump -bm 1.000000 Accessory_GlassesHiFrame_01_MATCAP__Instance_normal.jpeg
+
+newmtl Accessory_GlassesHiLens_01_MATCAP__Instance
+Ns 10.000005
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ni 1.500000
+illum 2
+map_Kd Accessory_GlassesHiLens_01_MATCAP__Instance_baseColor.png
+map_Ke Accessory_GlassesHiLens_01_MATCAP__Instance_emissive.jpeg
+map_d Accessory_GlassesHiLens_01_MATCAP__Instance_baseColor.png
+# map_Bump -bm 1.000000 Accessory_GlassesHiLens_01_MATCAP__Instance_normal.jpeg
+
+newmtl N00_000_00_Body_00_SKIN__Instance
+Ns 10.000005
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ni 1.500000
+illum 2
+map_Kd N00_000_00_Body_00_SKIN__Instance_baseColor.png
+map_Ke N00_000_00_Body_00_SKIN__Instance_emissive.jpeg
+map_d N00_000_00_Body_00_SKIN__Instance_baseColor.png
+# map_Bump -bm 1.000000 N00_000_00_Body_00_SKIN__Instance_normal.jpeg
+
+newmtl N00_000_00_EyeHighlight_00_EYE__Instance
+Ns 10.000005
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ni 1.500000
+illum 2
+map_Kd N00_000_00_EyeHighlight_00_EYE__Instance_baseColor.png
+map_Ke N00_000_00_EyeIris_00_EYE__Instance_emissive.jpeg
+map_d N00_000_00_EyeHighlight_00_EYE__Instance_baseColor.png
+# map_Bump -bm 1.000000 N00_000_00_EyeIris_00_EYE__Instance_normal.jpeg
+
+newmtl N00_000_00_EyeIris_00_EYE__Instance
+Ns 10.000005
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ni 1.500000
+illum 2
+map_Kd N00_000_00_EyeIris_00_EYE__Instance_baseColor.png
+map_Ke N00_000_00_EyeIris_00_EYE__Instance_emissive.jpeg
+map_d N00_000_00_EyeIris_00_EYE__Instance_baseColor.png
+# map_Bump -bm 1.000000 N00_000_00_EyeIris_00_EYE__Instance_normal.jpeg
+
+newmtl N00_000_00_EyeWhite_00_EYE__Instance
+Ns 10.000005
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ni 1.500000
+illum 2
+map_Kd N00_000_00_EyeWhite_00_EYE__Instance_baseColor.png
+map_Ke N00_000_00_EyeIris_00_EYE__Instance_emissive.jpeg
+map_d N00_000_00_EyeWhite_00_EYE__Instance_baseColor.png
+# map_Bump -bm 1.000000 N00_000_00_EyeIris_00_EYE__Instance_normal.jpeg
+
+newmtl N00_000_00_FaceBrow_00_FACE__Instance
+Ns 10.000005
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ni 1.500000
+illum 2
+map_Kd N00_000_00_FaceBrow_00_FACE__Instance_baseColor.png
+map_Ke N00_000_00_FaceBrow_00_FACE__Instance_emissive.jpeg
+map_d N00_000_00_FaceBrow_00_FACE__Instance_baseColor.png
+# map_Bump -bm 1.000000 N00_000_00_FaceBrow_00_FACE__Instance_normal.jpeg
+
+newmtl N00_000_00_FaceEyelash_00_FACE__Instance
+Ns 10.000005
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ni 1.500000
+illum 2
+map_Kd N00_000_00_FaceEyelash_00_FACE__Instance_baseColor.png
+map_Ke N00_000_00_FaceBrow_00_FACE__Instance_emissive.jpeg
+map_d N00_000_00_FaceEyelash_00_FACE__Instance_baseColor.png
+# map_Bump -bm 1.000000 N00_000_00_FaceBrow_00_FACE__Instance_normal.jpeg
+
+newmtl N00_000_00_FaceEyeline_00_FACE__Instance
+Ns 10.000005
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ni 1.500000
+illum 2
+map_Kd N00_000_00_FaceEyeline_00_FACE__Instance_baseColor.png
+map_Ke N00_000_00_FaceBrow_00_FACE__Instance_emissive.jpeg
+map_d N00_000_00_FaceEyeline_00_FACE__Instance_baseColor.png
+# map_Bump -bm 1.000000 N00_000_00_FaceBrow_00_FACE__Instance_normal.jpeg
+
+newmtl N00_000_00_FaceMouth_00_FACE__Instance
+Ns 10.000005
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd N00_000_00_FaceMouth_00_FACE__Instance_baseColor.jpeg
+map_Ke N00_000_00_FaceMouth_00_FACE__Instance_emissive.jpeg
+# map_Bump -bm 1.000000 N00_000_00_FaceMouth_00_FACE__Instance_normal.jpeg
+
+newmtl N00_000_00_Face_00_SKIN__Instance
+Ns 10.000005
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd N00_000_00_Face_00_SKIN__Instance_baseColor.jpeg
+map_Ke N00_000_00_Face_00_SKIN__Instance_emissive.jpeg
+# map_Bump -bm 1.000000 N00_000_00_Face_00_SKIN__Instance_normal.jpeg
+
+newmtl N00_000_00_HairBack_00_HAIR__Instance
+Ns 10.000005
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ni 1.500000
+illum 2
+map_Kd N00_000_00_HairBack_00_HAIR__Instance_baseColor.png
+map_Ke N00_000_00_Face_00_SKIN__Instance_emissive.jpeg
+map_d N00_000_00_HairBack_00_HAIR__Instance_baseColor.png
+# map_Bump -bm 1.000000 N00_000_00_HairBack_00_HAIR__Instance_normal.jpeg
+
+newmtl N00_000_Hair_00_HAIR__Instance
+Ns 10.000005
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd N00_000_Hair_00_HAIR__Instance_baseColor.jpeg
+map_Ke N00_008_01_Shoes_01_CLOTH_01__Instance_emissive.jpeg
+# map_Bump -bm 1.000000 N00_000_Hair_00_HAIR__Instance_normal.jpeg
+
+newmtl N00_002_02_Tops_01_CLOTH__Instance
+Ns 10.000005
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ni 1.500000
+illum 2
+map_Kd N00_002_02_Tops_01_CLOTH__Instance_baseColor.png
+map_Ke N00_000_00_Body_00_SKIN__Instance_emissive.jpeg
+map_d N00_002_02_Tops_01_CLOTH__Instance_baseColor.png
+# map_Bump -bm 1.000000 N00_002_02_Tops_01_CLOTH__Instance_normal.jpeg
+
+newmtl N00_008_01_Shoes_01_CLOTH_01__Instance
+Ns 10.000005
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ni 1.500000
+illum 2
+map_Kd N00_008_01_Shoes_01_CLOTH_01__Instance_baseColor.png
+map_Ke N00_008_01_Shoes_01_CLOTH_01__Instance_emissive.jpeg
+map_d N00_008_01_Shoes_01_CLOTH_01__Instance_baseColor.png
+# map_Bump -bm 1.000000 N00_008_01_Shoes_01_CLOTH_01__Instance_normal.jpeg
+
+newmtl N00_008_01_Shoes_01_CLOTH_02__Instance
+Ns 10.000005
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ni 1.500000
+illum 2
+map_Kd N00_008_01_Shoes_01_CLOTH_02__Instance_baseColor.png
+map_Ke N00_008_01_Shoes_01_CLOTH_01__Instance_emissive.jpeg
+map_d N00_008_01_Shoes_01_CLOTH_02__Instance_baseColor.png
+# map_Bump -bm 1.000000 N00_008_01_Shoes_01_CLOTH_01__Instance_normal.jpeg

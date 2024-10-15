@@ -1,0 +1,11 @@
+Model Information:
+* title:	Ika_musume___fbx
+* source:	https://sketchfab.com/3d-models/ika-musume---fbx-bbe81cbf2c184a93b8957577846eaec2
+* author:	Spongefamicom (https://sketchfab.com/ruizruizharry)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Ika_musume___fbx" (https://sketchfab.com/3d-models/ika-musume---fbx-bbe81cbf2c184a93b8957577846eaec2) by Spongefamicom (https://sketchfab.com/ruizruizharry) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

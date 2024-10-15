@@ -1,0 +1,11 @@
+Model Information:
+* title:	[Movie] ゆざわGp認定商品キャラ:八代目佐藤養助 稲庭干温飩 (MYS30)
+* source:	https://sketchfab.com/3d-models/movie-gp-mys30-7c5aabc5a55646aaaf02920f88338f9a
+* author:	yuzawageopark (https://sketchfab.com/yuzawageopark)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "[Movie] ゆざわGp認定商品キャラ:八代目佐藤養助 稲庭干温飩 (MYS30)" (https://sketchfab.com/3d-models/movie-gp-mys30-7c5aabc5a55646aaaf02920f88338f9a) by yuzawageopark (https://sketchfab.com/yuzawageopark) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

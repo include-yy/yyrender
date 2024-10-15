@@ -1,0 +1,6 @@
+* text=auto
+./*.cpp text eol=crlf
+./*.h text eol=crlf
+
+/assets/** -text -diff
+/include/** text -diff

@@ -1,0 +1,72 @@
+# Blender 4.1.1 MTL File: 'None'
+# www.blender.org
+
+newmtl Material_27
+Ns 11.455134
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd Material_28_baseColor.png
+map_Ke Material_28_baseColor.png
+
+newmtl Material_28
+Ns 11.455134
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd Material_28_baseColor.png
+map_Ke Material_28_baseColor.png
+
+newmtl Material_29
+Ns 11.455134
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd Material_28_baseColor.png
+map_Ke Material_28_baseColor.png
+
+newmtl Material_30
+Ns 11.455134
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd Material_28_baseColor.png
+map_Ke Material_28_baseColor.png
+
+newmtl Material_31
+Ns 11.455134
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd Material_28_baseColor.png
+map_Ke Material_28_baseColor.png
+
+newmtl Material_32
+Ns 11.455134
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd Material_28_baseColor.png
+map_Ke Material_28_baseColor.png
+
+newmtl Material_36
+Ns 11.455134
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd Material_28_baseColor.png
+map_Ke Material_28_baseColor.png

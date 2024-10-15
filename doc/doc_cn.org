@@ -1,0 +1,313 @@
+#+TITLE: yy-render --- Documentation
+#+DATE: [2024-07-07 21:59]--[2024-07-08 00:03]
+
+# #+options: html-preamble:nil
+#+options: ^:{}
+#+options: zeroth-name:About
+#+options: back-to-top:nil
+
+#+html_head_extra: <link rel="preconnect" href="https://fonts.googleapis.com">
+#+html_head_extra: <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+#+html_head_extra: <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
+#+begin_export html
+<link rel="stylesheet" href="https://cdnjs.sgcd.net/lxgw-wenkai-screen-webfont/lxgwwenkaigbscreen.css"/>
+<style>
+   body {
+     font-family: "LXGW WenKai Screen", sans-serif;
+   }
+</style>
+#+end_export
+
+本文档是由 include-yy 编写的一个简单 OBJ 模型渲染器。本文档具体包括程序的使用方式，程序的实现方式，以及一些细节。本文档由以下几个部分组成：
+
+1. 程序的编译和使用方式
+2. 程序的一些实现细节
+3. 可以继续改进的目标
+
+* 编译和使用
+
+在获取整个项目源代码后，您可以通过点击项目目录中的 SLN 文件来通过 *VS2022* 打开整个项目，然后通过 Build Solution（Ctrl+Shift+B）来编译整个项目，您可以选择使用 Debug 或 Release 编译目标。在完成构建后，您可以通过 F5 或 Ctrl+F5 启动程序。启动后的画面大致如下所示：
+
+[[./img/1.png]]
+
+在 60HZ 的屏幕刷新率下，大约经过 10 秒可以在窗口左上角看到这段时间内的平均帧数（对于 120Hz 显示屏则大约是 5s）。您可以通过按下鼠标左键并拖拽鼠标来绕人物中心旋转视角，并通过鼠标滚轮来拉近或拉远视角。您可以通过 =ESC= 键回到初始位置。
+
+除了基础的移动方法，您还可以通过 =T= 键由鼠标模式切换到键盘模式（再按一次可以切回鼠标模式）。在此模式下，您可以通过 =WASD= 来前进/左移/后退/右移，并通过方向键来调整视角， =↑= 对应于抬头， =↓= 对应于低头， =←= 对应于向左看， =→= 对应于向右看。此模式下，操作方式类似于一些第一人称射击游戏在死亡后的自由视角，不过视角的调整是通过方向键而不是鼠标。
+
+#+begin: note
+需要注意的是，鼠标控制和键盘控制使用了完全分离的变换矩阵参数，因此通过 =T= 切换模式后会突然变化到另一模式的视角。 =ESC= 会重置所有模式的状态。
+
+（在鼠标模式下（默认模式），按下鼠标右键拖拽也能变换视角，但是速度比左键慢，适合精细操作。）
+#+end:
+
+您可以通过 =H= 和 =L= 来顺时针/逆时针旋转光线；您可以通过 =J= 和 =K= 来向上或向下移动光源方向。
+
+** 打开新的模型
+
+您可以通过应用菜单栏上的 =Load= 选项选择并打开 OBJ 文件来渲染新的 OBJ 模型，以下是界面示意图，以及一些示例模型：
+
+| [[./img/2.png]] | [[./img/3.png]] |
+
+如果打开的并不是 OBJ 后缀文件，或者文件存在错误，yy-render 会弹出 MessageBox 提示详细的错误信息。
+
+我在源代码目录下的 Models 中提供了一些 OBJ 模型，可用于测试程序可用性。
+
+[[./img/19.png]]
+
+** 选择不同的 Shader
+
+您可以通过应用程序的菜单栏中的 =Shaders= 选择 5 种 Shader 之一，它们分别实现的效果是：以法向量作为颜色、以 map_Kd 材质作为颜色、以 map_Ke 材质作为颜色、使用 Ka、Kd 和 Ks 和 Phong 光照模型，以及最后的实现了 ShadowMap 的 Shader。菜单内容和不同的效果可见下图：
+
+#+caption: 五种不同的 Shader
+[[./img/4.png]]
+
+#+caption: 不同 Shader 下的 bunny
+[[./img/5.png]]
+
+** 是否使用默认的纹理
+
+在 OBJ 模型没有材质的情况下，yy-render 提供了一种默认材质，它来自 [[https://casual-effects.com/data/][McGuire Computer Graphics Archive]] 的 teapot。您可以通过菜单栏中的 Options 下拉菜单的 =use default defuse texture= 选项来选择使用或不适用默认材质：
+
+[[./img/6.png]]
+
+#+begin: note
+该选项仅用于最后两种 Shader。
+#+end:
+
+* 实现细节
+
+本节介绍了 yy-render 整个代码库的结构，以及其中的一些实现细节解释，希望对阅读该代码的人员有所帮助。
+
+** 总体介绍
+
+yy-render 解决方案由三个项目组成，它们分别是：OBJ 加载模块 yyobj、对 yyobj 进行测试的 yyobj_test，以及调用 yyobj 的应用程序项目 YY-Render。它们的目录结构如下图所示：
+
+[[./img/7.png]]
+
+- yyobj 项目实现的主要功能是读取 OBJ 文件以及 MTL 文件的内容，并将它们转换为可被直接使用的数据结构。
+- yyobj_test 项目对 yyobj 进行了单元测试，以及采用现有 obj 模型测试读取。
+- YY-Render 项目实现了 yy-render 应用程序。它的主要功能包括窗口的实现、相机的实现和 DX12 API 调用。
+
+** OBJ 模型加载
+
+对于 OBJ 文件的解析，我们可以考虑使用专门的 parser generator 来生成解析 OBJ 和 MTL 文件的 parser，不过由于 OBJ 文件的格式非常简单，解析过程中的上下文相关关键字也仅有 =g=, =o= 和 =s= ，从零开始实现一个 OBJ loader 并不是非常困难的事情，但是要做到高效、对错误友好、特性全面并不是一件比较轻松的事情，这意味着我们需要大量的测试，编写抽象层次较低的代码，以及研究文件标准文档。
+
+我在开始实现时，参考了 [[https://github.com/Bly7/OBJ-Loader][Bly7/OBJ-Loader]]，它使用了 =std::string= 和 =fstream= 进行字符串处理和文件 I/O，它的实现非常简单，但是缺点是性能较低，这主要是由于它逐行读取 OBJ 文件内容处理，太短的上下文导致函数调用开销过于频繁，带来了不能忽视的性能损耗：由于 Debug 模式下函数不会内联，Debug 与 Release 存在十倍左右的性能差距。[[https://github.com/thisistherk/fast_obj][thisistherk/fast_obj]] 在读取一大块文件内容后，使用指针操作来逐字节处理，这样大大减少了函数调用开销。[[https://github.com/guybrush77/rapidobj][guybrush77/rapidobj]] 甚至实现了多线程读取，相比 fast_obj 又获得了几倍的性能提升，但是它的代码相对于 fast_obj 要复杂太多，并不是一个容易的学习对象。
+
+某种意义上来说，我的实现 yyobj 是以上三者的杂交产物：我借鉴了 fast_obj 的数据结构，借鉴了 rapidobj 的错误处理，以及多边形分割为三角形的算法，最后是 OBJ-Loader 的法向量生成方法，三者成分的占比也许是 85%, 10%, 5% 的关系。
+
+yyobj 仅支持一部分 OBJ 标准，它不支持 =l=, =curv=, =curv2=, =surf= 等关键字，而且它也不支持 MTL 文件中的 =-= 选项，如 =-o=, =-s= 等等。
+
+*** 数据结构设计
+
+如我们所知，单独的顶点数据由三种，分别是 =v=, =vt= 和 =vn= ，分别代表位置、纹理坐标以及法向量。由于它们在 OBJ 文件中以行为单位顺序出现，因此以 =std::vector<float>= 作为这些点的容器非常适合。
+
+通过关键字 =f= 可以将不同种类的顶点数据组合得到面，面的顶点数量至少为 3。由于面的顶点数量不定，我们可以考虑使用类似 =std::vector<std::vector<VertexIndex>>= 的结构来存储，但是它并不连续因此对缓存不友好，更加合理的数据结构是以 =f= 中的每个顶点作为单元构建数组，然后使用 =face-vs= 数组记录各面的顶点数量：
+
+[[./img/8.png]]
+
+在处理 =g= 和 =o= 这两个分组关键字时，我们可以记录它在 =f= 向量和 =faces-vs= 向量中的起始位置和总面数来记录它的作用范围。由于本题目几乎不涉及分组相关的操作，我们可以不用过多关注 =o= 和 =g= 的分组，而是注意 =usemtl= 的材料划分。 =usemtl= 可以使用与 =o= 和 =g= 相同的方式记录，而且它的记录才是真正有用的部分：它可以用来在绘制顶点时确定使用不同材质的顶点分组信息。
+
+对于材质，我们可以使用单个向量记录材质中的纹理，而在材质对应的数据结构中存储纹理向量的偏移量，这样一来多个材质可以共享相同的纹理，可以避免纹理的重复加载，节省了空间。
+
+在 yyobj 项目中，各数据结构的定义位于 ObjWave.h 头文件中。
+
+*** 解析过程
+
+由于 OBJ 文件以行划分，且上下文非常简单，我们在根据行首获取的关键字将剩余的解析函数分派给专门的函数，这样的函数接受一个起始指针，处理完关键字对应的解析任务后将指针移动到结束处、作为下一个解析任务的起始位置。所有的逐行解析函数具有如下签名：
+
+[[./img/9.png]]
+
+在这些函数中 =parse_buffer= 负责的是分派的工作，它会根据行首的关键字将任务分配给不同 =parse_vertex= 等函数， =parse_buffer= 本身是一个巨大的 =switch-case= 结构。
+
+由于 OBJ 的绝大部分解析工作都是将字符串转换为 =float= 类型的浮点数，提高这部分的效率对整体效率非常重要。C++ 本身有 =std::atof= 和 =strtof= 等函数。在阅读 rapidobj 源代码时我发现它使用了 [[https://github.com/fastfloat/fast_float][fastfloat/fast_float]] 来解析浮点数字符串，根据项目 README 来看相比标准库有 4 到 10 倍的性能提升。经过我的个人测试， =fast_float= 比 =strtof= 快大约两倍，我在 yyobj 中使用了它来解析浮点数。
+
+#+begin: amendment
+fast_obj is the fastest single-threaded parser. It also compiles pretty much
+anywhere (any C compiler would do), but also has the least amount of
+features. However I could make it crash on syntax it does not support (\ line
+continuation); it might be the least robust of the parsers.
+
+https://aras-p.info/blog/2022/05/14/comparing-obj-parse-libraries/
+#+end:
+
+如果在解析过程中出现了错误怎么办？ fast_obj 的方法是尽可能忽略，或者是直接崩溃。rapidobj 使用了错误码来捕获解析过程中可能出现的错误，并保留解析错误出现位置的上下文信息。yyobj 采取了 rapidobj 的思路，为所有可能出现错误的地方分配了唯一的错误码，当出现错误时，库的使用者可以根据错误码对应的错误信息，以及包含行数和当前行字符串对应的上下文信息来尽快找到并修复错误。您可以在 ObjWave.h 中查看枚举类 =yyobj_errc= 和 =Error= 结构来了解错误处理相关的定义。以下是 =parse_vertex= 的部分实现，它会在解析浮点数出现错误时返回 =ParseFloatError= 错误码，这个错误会被 =parse_buffer= 注意到，并记录当前上下文信息：
+
+[[./img/10.png]]
+
+由于多出的错误处理代码，相比 fast_obj，yyobj 的速度只是它的一半，但是也足够快了。
+
+*** UTF-8 与 UTF-16
+
+在 Windows 上，字符类型 =wchar_t= 的长度为 2 ，可以装下长度为 2 的 UTF-16 编码字符。但目前更加流行的是 UTF-8 编码。yyobj 假设读取的文件采用 UTF-8 编码。在 Win32 API 中，以 A 结尾的函数表示接受传统 ASCII 字符串，而以 W 结尾的函数表示接受使用 UTF-16 的宽字符串 —— 至少 /Programming Windows/ 这本书上是这样写的。不过目前情况似乎发生了变化，微软通过扩展 A 结尾的函数来接受 UTF-8 字符串从而提供了系统级别的 UTF-8 支持（具体请参考 [[https://learn.microsoft.com/en-us/windows/apps/design/globalizing/use-utf8-code-page][Use UTF-8 code pages in Windows apps]]）。在 Windows10 中可以通过系统编码设定来全局启用 UTF-8 编码，但我们也可以通过 manifest.xml 描述文件来为单个应用程序应用 UTF-8 编码。YY-Render 就使用了 manifest.xml 启用了 UTF-8。
+
+#+begin_src xml
+  <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+  <assembly manifestVersion="1.0" xmlns="urn:schemas-microsoft-com:asm.v1">
+    <assemblyIdentity type="win32" name="..." version="6.0.0.0"/>
+    <application>
+      <windowsSettings>
+	<activeCodePage>UTF-8</activeCodePage>
+      </windowsSettings>
+    </application>
+  </assembly>
+#+end_src
+
+在这种情况下，只要源代码采用了 UTF-8 编码，其中的字符串字面量也会是 UTF-8 编码，这样的字符串可以方便地作为文件路径。
+
+*** 由多边形生成三角形
+
+OBJ 文件允许通过 =f= 关键字指定三个顶点以上的面，我们可以将这个面拆分为多个三角形来进行同一绘制。如果多边形是凸的，它就可以以一种非常简单的方式分割，但如果不是就会有些麻烦：
+
+[[./img/11.png]]
+
+如果是凸多边形，我们就可以像上图左边那样 012, 023, 034 ... 那样简单地分割下去，但是如果是凹多边形这样就行不通了。 rapidobj 采用了一种非常巧妙的实现方式，两两连接不相邻的两个顶点，并求取这两条线段的长度，如果作为三角形生成初始点 =0= 对应的那条更长，说明要更换初始点为另一对角线上的任一点了，此时的顺序将不是 012, 023，而是 013, 123。
+
+对于更多边数的多边形，rapidobj 给出了通用的解法，但是我在我的实现中采用了偷懒的方法：假设边数超过 4 的多边形为凸多边形。由于我从来没有遇到过 OBJ 文件中存在四边形以上的多边形，这样做应该是无害的。
+
+yyobj 的多边形分割实现位于函数 =Obj2Data= 中，它位于 =ObjWave.cpp= 的第 1243 行。
+
+*** OBJ 加载测试
+
+为了验证我的 yyobj 实现的正确性，我在测试项目 yyobj_test 中为大部分比较重要的解析函数编写了一些单元测试。您可以通过 =Ctrl e t= 打开测试对话框并运行所有测试：
+
+[[./img/12.png]]
+
+** YY-Render 的实现
+
+在本任务中，yyobj 和 yyobj_test 的代码行数大约占总行数的一半，剩下的一般是模型无关的渲染器的 DX12 实现。这一部分可以继续细分为如下组成：
+
+- 窗口处理相关代码，处理鼠标和键盘消息
+- 计时器代码，模拟时间流动
+- 纹理加载代码，根据不同格式的图片得到可载入 GPU 的纹理
+- 相机代码，获取视角变换和投影变换矩阵，在空间中移动相机
+- 渲染代码，绑定资源并完成渲染
+
+在这些部分中，渲染部分比较复杂，我会进行比较详细的介绍。由于我对 DX12 认识尚浅，代码的耦合度会比较高。
+
+*** Win32 窗体
+
+窗口的创建以及窗口消息处理函数功能的实现位于 W32.h 和 W32.cpp 中，里面包含窗口初始化以及消息循环等代码。这里我通过类 =W32Handler= 暴露了用于消息处理的接口函数，子类可以重新实现这些接口来处理窗口的鼠标和键盘消息：
+
+[[./img/13.png]]
+
+除开接口类 =W32Handler= 外，W32.cpp 的其余实现来自 [[https://github.com/microsoft/DirectX-Graphics-Samples/blob/master/Samples/Desktop/D3D12DynamicIndexing/src/Win32Application.cpp][D3D12DynamicIndexing]]，这个实现比较有意思的一点是它通过 PeekMessage 和在消息回调中不处理 WM_PAINT 消息来不断调用回调函数，从而达到了不断刷新窗口不断渲染的效果。但是这样做会导致我们无法创建模态子窗口（具体可以参考 [[https://stackoverflow.com/questions/59471442/message-box-is-not-working-inside-wm-command-win32-api][Message Box is not working inside WM_COMMAND!]]）。对此，我在创建模态对话框时让回调函数处理 WM_PAINT 时交给 DefWindowProc 处理掉 WM_PAINT，然后在模态对话框结束时调用 InvalidRect 重新生成 WM_PAINT 来继续不断刷新窗口。具体的实现请参考 W32.h 中的 =RunWithModal= 和 W32.cpp 中的回调函数中的 WM_PAINT 消息处理。
+
+=W32Handler= 在 Framework.h 中被 =Framework= 继承，这个子类实现了一些方便的功能，如获取应用程序所在目录并据此获取资源位置、创建 HardwareAdapter、设定窗口标题内容等。
+
+*** 计时器
+
+如果假设每两个相邻 WM_PAINT 消息之间的时间间隔相等，那么每帧之间的时间间隔就是一个定值，如果假设屏幕刷新率是 60HZ，那么时间间隔就是 16.67ms。但由于每帧间隔不可能是一个常数，我们需要一个计时器来计算两帧之间的时间差值作为实际的时间流逝。
+
+同样，yy-render 采用了来自 D3D12DynamicIndexing 的计时器，它在内部使用了 =QueryPerformanceCounter= 和 =QueryPerformanceFrequency= （来自 [[https://learn.microsoft.com/en-us/windows/win32/api/profileapi/][profileapi]]）来获取高精度时间。
+
+*** 相机
+
+相机的基础代码同样来自 D3D12DynamicIndexing 的 SimpleCamera，但是在它的基础上做出了一些修改和改进。原版的相机仅支持键盘操作，且只能在 =y=0= 的平面内移动，我进行了改进，使其能够根据当前俯仰角，在前进/后退（W/S）时能够在 =y= 轴上下移动。此外，我添加了鼠标支持，可以通过鼠标拖拽来让相机围绕世界坐标原点旋转来改变视角。键盘移动和鼠标移动是分开的，此处首先介绍键盘移动方式。
+
+在世界坐标系中，相机的位置可以使用 DX12 的 =XMFLOAT3= 表示，它的朝向可以用两个角度值来衡量：相对 =z= 轴的绕 y 轴的旋转角度 =yaw= ，以及相对 =xz= 平面的俯仰角度 =pitch= 。如下图所示：
+
+[[./img/14.png]]
+
+在相机空间中，我们可以通过 WASD 在平面 =y'=0= 中进行前后左右的移动，我们只需利用相机的位置以及相机的角度即可根据相机空间中的位移变换得到世界坐标中的位移。这一部分代码可以参考位于 SimpleCamera.cpp 的 =SimpleCamera::Update= 函数。通过 =XMMatrixLookToRH= 我们可以轻松地获取视角变换矩阵，这部分代码位于 =SimpleCamera::GetViewMatrix= 函数中。
+
+使用鼠标控制相机的逻辑更加简单一些，我们同样需要记录相对 =z= 轴绕 =y= 的旋转角度和相对 =xz= 平面的俯仰角，利用这些角度和相机离原点的距离我们可以获取相机的位置。但是相机的朝向是恒定的：指向世界坐标的原点。我在处理鼠标点击和拖拽消息上借鉴了 Introduction to 3D Game Programming with DirectX® 12 的部分代码，大约位于书中的第 263 页。我们可以通过 =XMMatrixLookAtRH= 获取使用鼠标模式时的视角变换矩阵。
+
+我将光线的实现也放在了相机中。它的实现与鼠标模式下的相机实现非常相似。
+
+最后，在做投影变换时，我使用了根据模型获得的立方体 bounding box，然后在视角变换时根据 bounding box 获取最大和最小的深度 =z= 坐标，这两个坐标可以用于确定投影变换时的近平面和远平面。
+
+*** 纹理图片读取
+
+[[https://github.com/microsoft/DirectXTK][DirectXTK]] 和 [[https://github.com/microsoft/DirectXTK12][DirectXTK12]] 提供了使用 [[https://learn.microsoft.com/en-us/windows/win32/wic/-wic-api][WIC]] 的图片读取代码，但是它的包装过度无法被直接使用（更准确地说，yy-render 过于简单和低级，不需要这样的高层 API：[[https://github.com/Microsoft/DirectXTK/wiki/WICTextureLoader#createwictexturefromfile][CreateWICTextureFromFile]]）。
+
+在我搜索能够渲染 OBJ 模型的代码示例时，我找到了 [[https://github.com/Joon1221/DX12-object-loader][Joon1221/DX12-object-loader]]，其中的代码可能借鉴了 Frank Luna 的代码。我在他的代码的基础上加以改进来读取纹理，具体的实现位于 YY-Render 的 LoadTexture.h 和 LoadTexture.cpp。
+
+*** 渲染实现
+
+yy-render 的主体实现位于 YY-Render 项目的 MyRender.h 和 MyRender.cpp 中。在 MyRender.h 中存在一个巨大的子类 =MyRender= ，它继承了 =Framework= 类。
+
+**** 消息处理
+
+=MyRender= 覆盖了基类 =W32Handler= 的各种消息处理方法，并将它们委托给类成员 =m_camera= ：
+
+[[./img/15.png]]
+
+=MyRender= 自己实现了菜单消息的处理，位于 MyRender.cpp 的 =OnCommand= 方法。菜单中各资源的 ID 来自 Resource.h，其中的资源 ID 生成用到了比较好玩的[[https://mc-deltat.github.io/articles/stateful-metaprogramming-cpp20][编译时计数器]]，而不是 =__COUNTER__= 。
+
+**** 资源初始化
+
+=MyRender= 的 =OnInit= 方法初始化了必要的资源。它调用了 =LoadPipeline=, =LoadAssetsOnce= 和 =LoadAssets= ，前两个函数初始化了一些与 OBJ 模型无关的资源， =LoadAssets= 实现了 OBJ 数据的加载功能。
+
+=LoadPipeline= 完成了以下工作：
+
+- 调用 =D3D12CreateDevice= 初始化 =ID3D12Device= 类型的 =m_device=
+- 检查是否支持 MSAA，并存储检查结果到 =m_useMSAA= 成员
+- 创建 swap chain
+- 分别创建 RTV，DSV 和 SAMPLER description headp，可以注意到 DSV 和 SAMPLER 的堆长度为 2，这是为了 ShadowMap 做准备
+- 如果当前设备支持 MSAA，那么 RTV 的数量将会是 3，提供一个额外的 RTV 用于多重采样
+
+=LoadAssetsOnce= 完成了以下工作：
+
+- 创建 RootSignature
+- 创建包含全部 5 个 Shader 的 PipelineState 对象
+- 创建深度模板视图
+- 创建采样器 和 Fence
+- 创建菜单
+
+其中，RootSignature 的结构如下所示：
+
+[[./img/16.png]]
+
+=c0= 对应变换矩阵以及一些选项值，可以参考 MyRender.h 中的 =SceneConstantBuffer= 结构详细了解； =c1= 对应 MTL 材质的各个参数， =s0~s8= 对应 MTL 材质中所有可能的 9 种纹理； =t0/t1= 对应两个纹理采样器，前者采样普通纹理，后者采样 ShadowMap 深度纹理； =s9= 对应 ShadowMap 深度纹理。
+
+需要注意的是，所有的 PipelineState 都设置 =FrontCounterClockwise= 为真，这是因为 OBJ 模型采用右手系，它的三角形绕序与 DX12 默认的左手系相反。此外，我并未修改默认的 CULL_MODE。
+
+[[./img/17.png]]
+
+=LoadAssets= 完成了以下工作：
+
+- 使用 =yyobj= 加载 OBJ 模型资源
+- 使用 =LoadTexture= 加载纹理图片资源
+- 创建顶点资源并写入顶点数据到 GPU
+- 根据模型调整模型变换矩阵，为相机提供包围盒数据
+- 更新纹理和常缓冲堆描述符
+- 创建常缓冲资源并写入材质数据到 GPU
+- 创建纹理资源并写入纹理到 GPU
+
+此处比较重要的是堆描述符中资源的填充顺序，这个顺序如下图所示：
+
+[[./img/18.png]]
+
+**** 命令序列
+
+当窗口收到 WM_PAINT 消息时，它会调用 =W32Handler= 指针指向对象的 =OnUpdate= 和 =OnPaint= 方法。在 MyRender 类中， =OnUpdate= 实现为更新 =SceneConstBuffer= 中的各成员的数据。 =OnPaint= 会调用 =PopulateCommandList= 来填充命令列表。在 =PopulateCommandList= 中需要注意的是 MSAA 和 ShadowMap 的生成。如果使用 ShadowMap，那么首先会使用光线作为相机进行一次渲染得到阴影材质，随后才会进行正常渲染。如果使用 MSAA，那么首先会渲染到一个并非直接呈现到显示屏的 Buffer，随后再降采样到 RTV。
+
+MSAA 的实现和 ShadowMap 的实现，我分别主要参考了：
+
+- https://valhally.xyz/index.php/2022/01/27/directx12-%e5%bc%80%e5%90%afmsaa/
+- https://qiita.com/em7dfggbcadd9/items/eebe457bbe9186ea5f90
+
+**** Shaders
+
+yy-render 使用了 5 个 shader：
+
+- normal_color.hlsl: 使用模型的法线作为物体表面颜色
+- mapKd_color.hlsl: 使用漫反射贴图作为颜色
+- mapKe_color.hlsl: 使用发光贴图作为颜色
+- KaKdKs.hlsl: 使用 Phong 模型加上材质参数在平行光下生成颜色
+- Final_ShaderMap.hlsl: 在前者基础上添加 ShadowMap 支持
+
+需要主要的是，ShadowMap 的 bias 参数选取存在一定的问题，生成的阴影效果可能不太理想。
+
+* 可以继续改进的目标
+
+yy-render 目前无法处理透明物体，也许可以考虑添加顺序无关透明 OIT 支持，以下资料也许有用：
+
+- https://webgpu.github.io/webgpu-samples/?sample=a-buffer#translucent.wgsl
+- http://www.klayge.org/2013/02/18/%E7%BB%A7%E7%BB%AD%E6%8E%A2%E7%B4%A2oit%EF%BC%9Aadaptive-transparency/
+- https://zhuanlan.zhihu.com/p/353940259
+- https://www.intel.com/content/www/us/en/developer/articles/technical/oit-approximation-with-pixel-synchronization.html
+- https://learn.microsoft.com/en-us/windows/win32/direct3d11/rasterizer-order-views
+- https://wlog.flatlib.jp/2015/07/22/n1775/

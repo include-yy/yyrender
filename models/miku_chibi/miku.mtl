@@ -1,0 +1,122 @@
+# Blender 4.1.1 MTL File: 'None'
+# www.blender.org
+
+newmtl body_CHM_SKIN_mat
+Ns 32.000008
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd body_CHM_SKIN_mat_baseColor.png
+
+newmtl eye_CHM_EYE_mat
+Ns 32.000008
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd eye_CHM_EYE_mat_baseColor.png
+
+newmtl face_CHM_SKIN_mat
+Ns 32.000008
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd face_CHM_SKIN_mat_baseColor.png
+
+newmtl face_CHM_SKIN_mat.001
+Ns 32.000008
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd face_CHM_SKIN_mat_baseColor.png
+
+newmtl hair_CHM_HAIR_mat
+Ns 32.000008
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd hair_CHM_HAIR_mat_baseColor.png
+
+newmtl hand_CHM_SKIN_mat
+Ns 32.000008
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 2
+map_Kd hand_CHM_SKIN_mat_baseColor.png
+map_d hand_CHM_SKIN_mat_baseColor.png
+
+newmtl hand_CHM_SKIN_mat.001
+Ns 32.000008
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd hand_CHM_SKIN_mat.001_baseColor.png
+
+newmtl hitem_CHM_CLOTH_mat
+Ns 32.000008
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd hitem_CHM_CLOTH_mat_baseColor.png
+
+newmtl jacket_CHM_CLOTH_mat
+Ns 32.000008
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd jacket_CHM_CLOTH_mat_baseColor.png
+
+newmtl lace_CHM_CLOTH_mat
+Ns 32.000008
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 2
+map_Kd lace_CHM_CLOTH_mat_baseColor.png
+map_d lace_CHM_CLOTH_mat_baseColor.png
+
+newmtl lambert318_mat
+Ns 32.000008
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 2
+map_Kd lambert318_mat_baseColor.png
+map_d lambert318_mat_baseColor.png
+
+newmtl object_CHM_ITEM_mat
+Ns 32.000008
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd object_CHM_ITEM_mat_baseColor.png
