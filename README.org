@@ -1,0 +1,35 @@
+#+TITLE: README
+#+DATE: [2024-10-15 22:07]
+
+* yy-render --- simple DX12 based OBJ render
+
+In 2024, I spent three months on it: July, Augest and September. It can render
+simple OBJ format 3D model.
+
+To give it a try, you need to install VS2022 on your PC, then compile and run
+it. I provide some models in the =models= folder.
+
+To get more information, please goto =doc= folder and check ORG or HTML documentation,
+I provide both English and Chinese versions.
+
+- [[./doc/doc_cn.org][yy-render --- a simple OBJ render]]
+- [[file:doc/doc_cn.org][yy-render --- 一个简单的 OBJ 渲染器]]
+
+Features:
+
+- fast enough OBJ parser
+- MSAA enabled
+- Simple Shadowmap
+
+TODO:
+
+- OIT(Order Independent Transparency) Support
+- Full-featured OBJ and MTL syntax support
+
+(If I want to learn more about CG, maybe I should finish the famous [[https://www.bilibili.com/video/BV1X7411F744][GAMES101]] first)
+
+** Related Projects
+
+- [[https://github.com/Joon1221/DX12-object-loader][Joon1221/DX12-object-loader]]
+- [[https://github.com/thisistherk/fast_obj][thisistherk/fast_obj]]
+- [[https://github.com/guybrush77/rapidobj][guybrush77/rapidobj]]
